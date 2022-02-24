@@ -56,4 +56,12 @@ https://community.broadcom.com/enterprisesoftware/browse/blogs/blogviewer?BlogKe
 
 https://techdocs.broadcom.com/us/en/symantec-security-software/identity-security/siteminder/12-8/configuring/policy-server-configuration/policy-overview/configure-re-authentication-for-sensitive-resources.html![image](https://user-images.githubusercontent.com/18162799/155477600-4cf92c5e-20a1-4872-be08-22bbbd94950b.png)
 
+ 
+ 
+ <img width="1448" alt="image" src="https://user-images.githubusercontent.com/18162799/155478910-4e3900a0-f052-41ef-93ae-62acca2d9ed1.png">
+
+ 
+ 
+ <img width="1477" alt="image" src="https://user-images.githubusercontent.com/18162799/155478961-d58d67a1-ff7a-4590-8ba3-827c66568290.png">
+ 
 
