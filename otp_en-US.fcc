@@ -1,0 +1,310 @@
+﻿<!-- SiteMinder Encoding=UTF-8; -->
+@username=%USER%
+@smretries=0
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=$$SMENC$$">
+ <title>Texas.gov Digital Identity Solution</title>
+    <script charset="utf-8" src="./js/ThemeConfiguration.e26135a315.js"></script><link rel="icon" type="image/x-icon" href="https://dev.myaccess.texas.gov/sso/XUI/themes/mytheme//images/TDISicon.png"><link rel="shortcut icon" type="image/x-icon" href="https://dev.myaccess.texas.gov/sso/XUI/themes/mytheme//images/TDISicon.png"><link rel="stylesheet" type="text/css" href="./js/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="./js/structure.css"><link rel="stylesheet" type="text/css" href="./js/mytheme.css"><script charset="utf-8" src="./js/439.a9de7a3567.js"></script><script charset="utf-8" src="./js/441.e4142957cb.js"></script><script charset="utf-8" src="./js/440.5db1c750a8.js"></script><script charset="utf-8" src="./js/438.6cf419eeba.js"></script><script charset="utf-8" src="./js/435.a28f145740.js"></script><script charset="utf-8" src="./js/434.579e82b80b.js"></script><script charset="utf-8" src="./js/433.5c9a9a9258.js"></script><script charset="utf-8" src="./js/432.d41e476a47.js"></script><script charset="utf-8" src="./js/431.25f9e7f0cf.js"></script><script charset="utf-8" src="./js/430.f5978c8a29.js"></script><script charset="utf-8" src="./js/429.bf6d54a957.js"></script><script charset="utf-8" src="./js/427.58568a0e0c.js"></script><script charset="utf-8" src="./js/426.da08d450a0.js"></script><script charset="utf-8" src="./js/425.7e1635884f.js"></script><script charset="utf-8" src="./js/424.79187503d4.js"></script><script charset="utf-8" src="./js/423.f0a290fbeb.js"></script><script charset="utf-8" src="./js/422.4ce5d541dc.js"></script><script charset="utf-8" src="./js/421.ee5ed4e326.js"></script><script charset="utf-8" src="./js/428.f22df5a1cc.js"></script><script charset="utf-8" src="./js/405.4a2556faa2.js"></script><script charset="utf-8" src="./js/403.dfc053f3b1.js"></script><script charset="utf-8" src="./js/404.7938360ab5.js"></script><script charset="utf-8" src="./js/386.53c10a92f3.js"></script><script charset="utf-8" src="./js/420.0db05a13a8.js"></script><script charset="utf-8" src="./js/419.d371155cfd.js"></script><script charset="utf-8" src="./js/401.4aa1e3f0eb.js"></script></head>
+
+<!-- Cross-frame scripting prevention: This code will prevent this page from being encapsulated within HTML frames. Remove, or comment out, this code if the functionality that is contained in this SiteMinder page is to be included within HTML frames. -->
+<STYLE> 
+   html {
+      display : none ;
+      visibility : hidden; 
+   } </STYLE>
+<SCRIPT>
+   if( self == top ) {
+       //document.documentElement.style.display = 'block' ; 
+       //document.documentElement.style.visibility = 'visible' ; 
+   } else {
+       top.location = self.location ; 
+   }
+</SCRIPT>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function resetCredFields()
+{
+  document.Login.PASSWORD.value = "";
+}
+
+function insertAfter(el, referenceNode) {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+	while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function callback() {
+
+	//alert(getCookie("SMUSRMSG"));
+	
+	var smUserMsg = getCookie("SMUSRMSG");
+	
+	//alert(smUserMsg);
+	
+	
+	
+	const queryString = window.location.search;
+		console.log(queryString);
+		
+		const urlParams = new URLSearchParams(queryString);
+	
+	if(smUserMsg!=undefined && smUserMsg.indexOf('OTP_VALIDATION_FAILED')!=-1){
+	
+			var tokens = smUserMsg.split('=#=');
+			
+			var username = tokens[1];
+		
+			document.cookie = "SMUSRMSG=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+			document.documentElement.style.display = 'block' ; 
+			document.documentElement.style.visibility = 'visible' ; 
+			document.Login.encpayload.value=tokens[2];
+			
+			document.Login.USER.value = username;
+
+			var message = document.createElement("div");
+			message.align = "center";
+			message.className = "form-group aria-label ";
+			message.style = "height: auto;";
+			message.innerHTML = '<p><span id="alert-system.alert-message.alert-danger">Invalid OTP</span></p>';
+
+			var anchor = document.getElementById("HTMLMessageNode_vAlign_Neutral").parentNode;
+			insertAfter(message, anchor);
+			
+			document.getElementById("div_pass").style.display='block';
+			document.getElementById("Login").style.display='block';
+			document.getElementById("resendOtp").style.display='block';
+	} else if(smUserMsg!=undefined && smUserMsg.indexOf('OTP_LOCKED')!=-1){
+	
+			var tokens = smUserMsg.split('=#=');
+			
+			var username = tokens[1];
+		
+			document.cookie = "SMUSRMSG=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+			document.documentElement.style.display = 'block' ; 
+			document.documentElement.style.visibility = 'visible' ; 
+			
+			document.Login.USER.value = username;
+
+			var message = document.createElement("div");
+			message.align = "center";
+			message.className = "form-group aria-label ";
+			message.style = "height: auto;";
+			message.innerHTML = '<p><span id="alert-system.alert-message.alert-danger">Account Locked due to invalid OTP attempts</span></p>';
+
+			var anchor = document.getElementById("HTMLMessageNode_vAlign_Neutral").parentNode;
+			insertAfter(message, anchor);
+			
+			document.getElementById("div_pass").style.display='none';
+			document.getElementById("Login").style.display='none';
+			document.getElementById("resendOtp").style.display='none';
+	}else {
+		document.getElementById("resendOtp").style.display='none';
+		document.getElementById("div_pass").style.display='block';
+		document.getElementById("Login").style.display='block';
+		
+		
+		
+		const choice = urlParams.get('CHOICE')
+		console.log(choice);
+		//alert(choice);
+		
+		if(choice == null){
+		//If the choices are not available, it redirects to the JSP Page which is protected by normal login.fcc page.
+			const targetURL = urlParams.get('TARGET')
+			console.log(targetURL);
+			var tmpTargetURL=encodeURIComponent(targetURL);
+		
+			const agentName = urlParams.get('SMAGENTNAME');
+			console.log(agentName);
+			var tmpAgentName=encodeURIComponent(agentName);
+			
+			const smauthreason = urlParams.get('SMAUTHREASON');
+			var tmpSmauthreason=encodeURIComponent(smauthreason);
+			
+			window.location = "/affwebservices/stepup.jsp?SMAGENTNAME="+tmpAgentName+"&TARGET="+tmpTargetURL+"&SMAUTHREASON="+tmpSmauthreason;
+			return;
+		}
+		
+		document.documentElement.style.display = 'block' ; 
+		document.documentElement.style.visibility = 'visible' ; 
+		
+		
+		document.Login.USER.value = urlParams.get("USER");
+
+		var message = document.createElement("div");
+		message.align = "center";
+		message.className = "form-group aria-label ";
+		message.style = "height: auto;";
+		message.innerHTML = '<p><span id="maskedphone"> '+choice+'</span></p>';
+
+		var anchor = document.getElementById("HTMLMessageNode_vAlign_Neutral").parentNode;
+		insertAfter(message, anchor);
+	}
+}
+
+
+if (document.readyState !== 'loading') {
+  callback();
+} else {
+  document.addEventListener("DOMContentLoaded", callback);
+}
+
+function submitForm()
+{
+
+	//alert("Submit...");
+
+    const queryString = window.location.search;
+	console.log(queryString);
+	
+	const urlParams = new URLSearchParams(queryString);
+	
+	const targetURL = urlParams.get('TARGET')
+	console.log(targetURL);
+	
+	const requestOTP = urlParams.get('REQUESTOTP')
+	console.log(requestOTP);
+	
+	var retryPayload = document.Login.encpayload.value;
+	
+	var passwordObj = document.Login.PASSWORD.value;
+	
+	if(retryPayload!=undefined && retryPayload!=null && retryPayload != ''){
+		document.Login.PASSWORD.value = "OTP#=#"+passwordObj + "#&#REQUEST_PAYLOAD#=#"+retryPayload;
+	} else {
+		document.Login.PASSWORD.value = "OTP#=#"+passwordObj + "#&#REQUEST_PAYLOAD#=#"+requestOTP;
+	}
+	
+	
+    document.Login.submit();
+}
+
+function resendOTP(){
+
+		const queryString = window.location.search;
+		console.log(queryString);
+		
+		const urlParams = new URLSearchParams(queryString);
+		
+		const choice = urlParams.get('CHOICE')
+		console.log(choice);
+		//alert(choice);
+		
+		const targetURL = urlParams.get('TARGET')
+			console.log(targetURL);
+			var tmpTargetURL=encodeURIComponent(targetURL);
+		
+			const agentName = urlParams.get('SMAGENTNAME');
+			console.log(agentName);
+			var tmpAgentName=encodeURIComponent(agentName);
+			
+			const smauthreason = urlParams.get('SMAUTHREASON');
+			var tmpSmauthreason=encodeURIComponent(smauthreason);
+			
+			window.location = "/affwebservices/stepup.jsp?SMAGENTNAME="+tmpAgentName+"&TARGET="+tmpTargetURL+"&SMAUTHREASON="+tmpSmauthreason;
+			return;
+		
+}
+
+
+
+</SCRIPT>
+
+</head>
+
+ <body style="display:none" class="footer-deep" >
+    <!--<![endif]-->
+        <div id="messages" class="clearfix"></div>
+        <div id="wrapper" aria-busy="false"><div id="login-base">
+  <div class="txheader">
+    <p id="bannertext"><img class="flagimage" src="./images/texasflag.png" alt="texas flag in a small circle">  </p>
+</div>
+  <div class="main-logo-holder">
+    <img class="main-logo" src="./images/TDISwhite.png" alt="txt digital identity solution logo">
+  </div>
+  
+      
+  
+    
+    <div id="content">
+<div class="container">
+
+
+<form NAME="Login" METHOD="POST" method="post" class="form login col-sm-6 col-sm-offset-3" autocomplete="off" data-stage="">
+
+<fieldset class="row"><div align="center" class="form-group aria-label " style="height: auto;"><p><span id="passcodetitle" style="color: rgb(48, 79, 254); font-size: 40px; font-weight: bold;">Please enter your passcode.</span></p></div>
+
+                <div class="form-group">
+				<input type="hidden" id="HTMLMessageNode_vAlign_Neutral" aria-hidden="true" name="callback_1" value="">
+				</div>
+				
+
+                <div class="form-group">
+					<INPUT TYPE=HIDDEN NAME="SMENC" VALUE="$$SMENC$$">
+					<INPUT type=HIDDEN name="SMLOCALE" value="US-EN">
+				<div class="form-group">
+					<!--<input type="text" name="USER" size="30" style="margin-left: 1px" value="$$USER$$">-->
+					<input type="text" id="USER" name="USER" class="form-control input-lg" value="" readOnly=true>
+				</div>
+				<div class="form-group" id="div_pass">
+					<label for="idToken5" class="aria-label sr-only separator">
+						<span>One Time Passcode</span>
+					</label>
+					<input type="text" id="PASSWORD" name="PASSWORD" class="form-control input-lg" placeholder="One Time Passcode" value="" data-validator="required" required="" data-validator-event="keyup">
+                </div>
+	  
+	      <input type=hidden name=target value="$$target$$">
+		 <!-- <input type=hidden name=target value="http://win-ee92ljm8tqb.yasas.com:9580/sample/secondpage.html"> -->
+		 <!--<input type=hidden name=target value="http://win-ee92ljm8tqb.yasas.com:9580/testapp/headers.jsp"> -->
+		 
+	      <input type=hidden name=smquerydata value="$$smquerydata$$">
+	      <input type=hidden name=smauthreason value="$$smauthreason$$">
+	      <input type=hidden name=smagentname value="$$smagentname$$">
+	      <input type=hidden name=postpreservationdata value="$$postpreservationdata$$">
+		  <input type=hidden id=encpaylaod name=encpayload value=""/>
+	      <input id="Login" name="Login" type="submit" role="button" index="0" value="Submit" class="btn btn-lg btn-block btn-uppercase btn-primary" onClick="submitForm();">
+		  <!--<input id="resendOtp" name="resendOtp" type="button" role="button" index="0" value="Resend OTP" class="btn btn-lg btn-block btn-uppercase btn-primary" onClick="resendOTP();">-->
+		  <input id="resendOtp" name="resendOtp" type="submit" role="button" index="1" value="Resend Passcode" class="btn btn-lg btn-block btn-uppercase btn-default" onClick="resendOTP();">
+        </fieldset>
+	 
+</form>
+</div>
+</div>
+</div>
+</div>
+        <footer id="footer" class="footer text-muted"><div class="container">
+    <div id="footer">
+        
+       <p><img class="txfooterimage" src="./images/TDISicon.png" alt="Small circle with texas outline">  Copyright © 2020  All rights reserved.</p>
+            
+       
+    </div>
+</div>
+</footer>
+        <div id="dialog"></div>
+    <script type="text/javascript" src="./js/main.d5812d8b36.js"></script>
+<script language="javascript">
+  document.forms["Login"].elements["USER"].focus();
+</script>
+
+</body>
+</html>
